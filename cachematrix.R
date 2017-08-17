@@ -11,29 +11,29 @@ makeCacheMatrix <- function(x = matrix()) {
     ##Initialize the inverse matrix value to NULL
     m <- NULL
 
-	##Function to set the regular matrix
-	##This is initializes the inverse matrix to NULL
+    ##Function to set the regular matrix
+    ##This is initializes the inverse matrix to NULL
     set <- function(y) {
         x <<- y
         m <<- NULL
     }
 
-	##This function returns the regular matrix
+    ##This function returns the regular matrix
     get <- function() {
-		x
-	}
+        x
+    }
 
-	##This function stores a value in the cache
+    ##This function stores a value in the cache
     setinverse <- function(inverse) {
-		m <<- inverse
-	}
+        m <<- inverse
+    }
 
-	##This function returns stored value from the cache
+    ##This function returns stored value from the cache
     getinverse <- function() {
-		m
-	}
+        m
+    }
 
-	##Construct and return a list of all the above functions
+    ##Construct and return a list of all the above functions
     list(set = set, get = get,
          setinverse = setinverse,
          getinverse = getinverse)
@@ -48,21 +48,21 @@ cacheSolve <- function(x, ...) {
     ##Get the inverse of the matrix from a cache
     m <- x$getinverse()
 
-	##Check if the matrix is not null. If so, return the cached version
+    ##Check if the matrix is not null. If so, return the cached version
     if(!is.null(m)) {
         message("getting cached data")
         return(m)
     }
 	
-	##Else, get the original matrix from the special matrix
+    ##Else, get the original matrix from the special matrix
     data <- x$get()
 	
-	##Get the inverse of the original matrix
+    ##Get the inverse of the original matrix
     m <- solve(data, ...)
 	
-	##Store the inverse in the cache
+    ##Store the inverse in the cache
     x$setinverse(m)
 	
-	##Return the inverse
+    ##Return the inverse
     m
 }
